@@ -2,10 +2,11 @@ const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
 
-const mockedData = require("./api/data");
-const helpers = require("./api/helpers");
+const mockedData = require("./data");
+const helpers = require("./helpers");
 
 const { data, talents } = mockedData;
+
 const app = express();
 const port = 3000;
 
@@ -148,3 +149,5 @@ app.post("/job/:id/apply", (req, res) => {
 });
 
 app.listen(port, () => console.log(`Listening on http://localhost:${port}`));
+
+module.exports = app;
