@@ -19,8 +19,9 @@ router.post("/:id/apply", (req, res) => {
   const application = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
-    jobTitle: req.body.jobTitle,
+    phone: req.body.phone,
     email: req.body.email,
+    bio: req.body.bio,
   };
 
   const missingFields = helpers.getMissingFields(application);
@@ -36,9 +37,20 @@ router.post("/:id/apply", (req, res) => {
   }
 
   const isValidEmail = helpers.validateEmail(application.email);
+  const isValidPhone = helpers.validateEmail(application.phone);
 
-  if (!isValidEmail) {
+  if (!isValidEmail && isValidPhone) {
     return res.status(400).json({ error: { message: "invalid email" } });
+  }
+
+  if (!isValidPhone && isValidEmail) {
+    return res.status(400).json({ error: { message: "invalid phone" } });
+  }
+
+  if (!isValidPhone && !isValidEmail) {
+    return res
+      .status(400)
+      .json({ error: { message: "invalid email and phone" } });
   }
 
   res.send("applied successfully");
