@@ -16,6 +16,13 @@ const router = express.Router();
 // });
 
 router.get("/:id", async (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "DELETE, PUT, GET, POST, OPTIONS");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+
   const { id } = req.params;
   const jobs = await axios.get(
     "https://wuzzuf.net/api/job?filter%5Bcompany%5D=15061&filter%5Bstatus%5D=active"
@@ -65,9 +72,7 @@ router.post("/:id/apply", (req, res) => {
       .status(400)
       .json({ error: { message: "invalid email and phone" } });
   }
-  res
-    .status(200)
-    .json({ success: true, message: "Application submitted successfully." });
+  res.status(200).json({ data: application });
 });
 
 // POST endpoint
