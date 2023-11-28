@@ -1,17 +1,30 @@
 const express = require("express");
 const axios = require("axios");
 
-const mockedData = require("../utils/data");
+// const mockedData = require("../utils/data");
 const helpers = require("../helpers");
 
 const router = express.Router();
-const { data } = mockedData;
+// const { data } = mockedData;
 
-router.get("/:id", (req, res) => {
+// router.get("/:id", (req, res) => {
+//   const { id } = req.params;
+//   const job = data.jobs.find((job) => job.id === id);
+
+//   if (job) return res.status(200).json({ data: { job } });
+//   return res.status(404).json({ error: { message: "Not found" } });
+// });
+
+router.get("/:id", async (req, res) => {
   const { id } = req.params;
-  const job = data.jobs.find((job) => job.id === id);
+  const jobs = await axios.get(
+    "https://wuzzuf.net/api/job?filter%5Bcompany%5D=15061&filter%5Bstatus%5D=active"
+  );
 
-  if (job) return res.status(200).json({ data: { job } });
+  const job = jobs.data.data.filter((job) => job.id === id);
+
+  if (job) return res.status(200).json({ data: job[0] });
+
   return res.status(404).json({ error: { message: "Not found" } });
 });
 
