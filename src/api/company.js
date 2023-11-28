@@ -17,7 +17,6 @@ router.get("/", async (req, res) => {
         attributes: {
           description: company.data.data.attributes.description,
           name: company.data.data.attributes.name,
-          perks: company.data.data.attributes.perks,
           website: company.data.data.attributes.website,
           logoUrl: company.data.data.links.defaultLogoUrl,
           coverUrl: company.data.data.links.coverUrl,
