@@ -3,10 +3,10 @@ const axios = require("axios");
 
 const router = express.Router();
 
-router.get("/:id", async (req, res) => {
+router.get("/", async (req, res) => {
   const { id } = req.params;
   const company = await axios.get(
-    `https://wuzzuf.net/api/company/${id}?include=size,type,city,country,workIndustries.workIndustry`
+    "https://wuzzuf.net/api/company/15061?include=size,type,city,country,workIndustries.workIndustry"
   );
 
   if (company)
@@ -28,10 +28,10 @@ router.get("/:id", async (req, res) => {
   return res.status(404).json({ error: { message: "Not found" } });
 });
 
-router.get("/:id/jobs", async (req, res) => {
+router.get("/jobs", async (req, res) => {
   const { id } = req.params;
   const jobs = await axios.get(
-    `https://wuzzuf.net/api/job?filter%5Bcompany%5D=${id}&filter%5Bstatus%5D=active`
+    "https://wuzzuf.net/api/job?filter%5Bcompany%5D=15061&filter%5Bstatus%5D=active"
   );
 
   if (jobs) {
