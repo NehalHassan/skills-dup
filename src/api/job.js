@@ -1,7 +1,7 @@
 const express = require("express");
 const axios = require("axios");
 
-const mockedData = require("../data");
+const mockedData = require("../utils/data");
 const helpers = require("../helpers");
 
 const router = express.Router();
