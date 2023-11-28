@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npx nodemon api/index.js",
-    "start": "node api/index.js",
+    "dev": "npx nodemon src/index.js",
+    "start": "node src/index.js",
+    "vercel-build": "echo building...",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "nehalhassan",
