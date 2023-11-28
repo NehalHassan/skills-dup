@@ -50,7 +50,7 @@ router.post("/:id/apply", (req, res) => {
   }
 
   const isValidEmail = helpers.validateEmail(application.email);
-  const isValidPhone = helpers.validateEmail(application.phone);
+  const isValidPhone = helpers.validatePhone(application.phone);
 
   if (!isValidEmail && isValidPhone) {
     return res.status(400).json({ error: { message: "invalid email" } });
@@ -66,7 +66,7 @@ router.post("/:id/apply", (req, res) => {
       .json({ error: { message: "invalid email and phone" } });
   }
 
-  res.send("applied successfully");
+  res.status(200).json({ message: "succeeded" });
 });
 
 module.exports = router;
