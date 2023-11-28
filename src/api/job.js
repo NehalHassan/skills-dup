@@ -66,7 +66,7 @@ router.post("/:id/apply", (req, res) => {
       .json({ error: { message: "invalid email and phone" } });
   }
 
-  res.header("Access-Control-Allow-Origin", "https://skills-dup.vercel.app");
+  res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "POST");
   res.header("Access-Control-Allow-Headers", "Content-Type");
 
