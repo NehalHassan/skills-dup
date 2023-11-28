@@ -67,7 +67,7 @@ router.post("/:id/apply", (req, res) => {
   }
 
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "POST");
+  res.header("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.header("Access-Control-Allow-Headers", "Content-Type");
 
   res.status(200).json({ data: application });
