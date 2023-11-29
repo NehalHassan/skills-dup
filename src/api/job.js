@@ -55,6 +55,8 @@ router.post("/:id/apply", (req, res) => {
       .json({ error: { message: "invalid email and phone" } });
   }
   return res.status(200).json({
+    success: true,
+    message: "Application submitted successfully.",
     data: {
       firstName,
       lastName,
