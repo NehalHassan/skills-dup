@@ -74,11 +74,7 @@ router.post("/:id/apply", (req, res) => {
       .status(400)
       .json({ error: { message: "invalid email and phone" } });
   }
-  try {
-    return res.status(200).json({ data: application });
-  } catch (err) {
-    return res.status(500).json(err);
-  }
+  return res.status(200).json({ data: application });
 });
 
 // POST endpoint
