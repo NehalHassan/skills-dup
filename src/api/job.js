@@ -16,19 +16,6 @@ const router = express.Router();
 //   return res.status(404).json({ error: { message: "Not found" } });
 // });
 
-router.get("/:id", async (req, res) => {
-  const { id } = req.params;
-  const jobs = await axios.get(
-    "https://wuzzuf.net/api/job?filter%5Bcompany%5D=15061&filter%5Bstatus%5D=active"
-  );
-
-  const job = jobs.data.data.filter((job) => job.id === id);
-
-  if (job) return res.status(200).json({ data: job[0] });
-
-  return res.status(404).json({ error: { message: "Not found" } });
-});
-
 router.post("/:id/apply", (req, res) => {
   const { firstName, lastName, phone, email, bio } = req.body;
   console.log(req.body);
@@ -75,6 +62,19 @@ router.post("/:id/apply", (req, res) => {
       bio,
     },
   });
+});
+
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  const jobs = await axios.get(
+    "https://wuzzuf.net/api/job?filter%5Bcompany%5D=15061&filter%5Bstatus%5D=active"
+  );
+
+  const job = jobs.data.data.filter((job) => job.id === id);
+
+  if (job) return res.status(200).json({ data: job[0] });
+
+  return res.status(404).json({ error: { message: "Not found" } });
 });
 
 // POST endpoint
