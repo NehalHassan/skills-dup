@@ -15,74 +15,74 @@ const router = express.Router();
 //   return res.status(404).json({ error: { message: "Not found" } });
 // });
 
-router.post("/:id/apply", (req, res) => {
-  const { body } = req;
-  const { firstName, lastName, phone, email, bio } = body;
-  console.log(body);
-  res.setHeader("Access-Control-Allow-Credentials", true);
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  // another common pattern
-  res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET,OPTIONS,PATCH,DELETE,POST,PUT"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
-  );
-  res.setHeader("Content-Type", "application/json");
-  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-  if (req.method === "OPTIONS") {
-    res.status(200).end();
-    return;
-  }
-  const missingFields = helpers.getMissingFields({
-    firstName,
-    lastName,
-    phone,
-    email,
-    bio,
-  });
+// router.post("/:id/apply", (req, res) => {
+//   const { body } = req;
+//   const { firstName, lastName, phone, email, bio } = body;
+//   console.log(body);
+//   res.setHeader("Access-Control-Allow-Credentials", true);
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   // another common pattern
+//   res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
+//   res.setHeader(
+//     "Access-Control-Allow-Methods",
+//     "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+//   );
+//   res.setHeader(
+//     "Access-Control-Allow-Headers",
+//     "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+//   );
+//   res.setHeader("Content-Type", "application/json");
+//   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+//   if (req.method === "OPTIONS") {
+//     res.status(200).end();
+//     return;
+//   }
+//   const missingFields = helpers.getMissingFields({
+//     firstName,
+//     lastName,
+//     phone,
+//     email,
+//     bio,
+//   });
 
-  if (missingFields.length > 0) {
-    return res.status(400).json({
-      error: {
-        message: `${missingFields.join(",")} ${
-          missingFields.length > 1 ? "fields are" : "field is"
-        } required`,
-      },
-    });
-  }
+//   if (missingFields.length > 0) {
+//     return res.status(400).json({
+//       error: {
+//         message: `${missingFields.join(",")} ${
+//           missingFields.length > 1 ? "fields are" : "field is"
+//         } required`,
+//       },
+//     });
+//   }
 
-  const isValidEmail = helpers.validateEmail(email);
-  const isValidPhone = helpers.validatePhone(phone);
+//   const isValidEmail = helpers.validateEmail(email);
+//   const isValidPhone = helpers.validatePhone(phone);
 
-  if (!isValidEmail && isValidPhone) {
-    return res.status(400).json({ error: { message: "invalid email" } });
-  }
+//   if (!isValidEmail && isValidPhone) {
+//     return res.status(400).json({ error: { message: "invalid email" } });
+//   }
 
-  if (!isValidPhone && isValidEmail) {
-    return res.status(400).json({ error: { message: "invalid phone" } });
-  }
+//   if (!isValidPhone && isValidEmail) {
+//     return res.status(400).json({ error: { message: "invalid phone" } });
+//   }
 
-  if (!isValidPhone && !isValidEmail) {
-    return res
-      .status(400)
-      .json({ error: { message: "invalid email and phone" } });
-  }
-  return res.status(200).json({
-    success: true,
-    message: "Application submitted successfully.",
-    data: {
-      firstName,
-      lastName,
-      phone,
-      email,
-      bio,
-    },
-  });
-});
+//   if (!isValidPhone && !isValidEmail) {
+//     return res
+//       .status(400)
+//       .json({ error: { message: "invalid email and phone" } });
+//   }
+//   return res.status(200).json({
+//     success: true,
+//     message: "Application submitted successfully.",
+//     data: {
+//       firstName,
+//       lastName,
+//       phone,
+//       email,
+//       bio,
+//     },
+//   });
+// });
 
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
@@ -98,20 +98,17 @@ router.get("/:id", async (req, res) => {
 });
 
 // // POST endpoint
-// router.post("/apply2", (req, res) => {
-//   // Access JSON data from the request body
-//   const { firstName, lastName, phone, email, bio } = req.body;
+router.post("/:id/apply", (req, res) => {
+  // Access JSON data from the request body
+  const { firstName, lastName, phone, email, bio } = req.body;
 
-//   // Your logic to handle the POST request...
+  // Your logic to handle the POST request...
 
-//   // Send a response
-//   res
-//     .status(200)
-//     .json({
-//       success: true,
-//       message: "Application submitted successfully.",
-//       app: req.body,
-//     });
-// });
+  // Send a response
+  res.status(200).json({
+    success: true,
+    message: "Application submitted successfully.",
+  });
+});
 
 module.exports = router;
