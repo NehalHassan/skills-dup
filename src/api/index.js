@@ -10,7 +10,7 @@ const talents = require("./talents");
 
 router.get("/", (req, res) => {
   res.json({
-    message: "API - 👋🌎🌍🌏",
+    message: "API - Company",
   });
 });
 
