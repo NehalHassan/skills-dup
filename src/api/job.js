@@ -17,13 +17,6 @@ const router = express.Router();
 // });
 
 router.get("/:id", async (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "DELETE, PUT, GET, POST, OPTIONS");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-
   const { id } = req.params;
   const jobs = await axios.get(
     "https://wuzzuf.net/api/job?filter%5Bcompany%5D=15061&filter%5Bstatus%5D=active"
@@ -38,7 +31,12 @@ router.get("/:id", async (req, res) => {
 
 router.post("/:id/apply", (req, res) => {
   const { firstName, lastName, phone, email, bio } = req.body;
-
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "DELETE, PUT, GET, POST, OPTIONS");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
   const missingFields = helpers.getMissingFields({
     firstName,
     lastName,
