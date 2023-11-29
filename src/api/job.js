@@ -16,7 +16,7 @@ const router = express.Router();
 //   return res.status(404).json({ error: { message: "Not found" } });
 // });
 
-router.post("/apply/:id", (req, res) => {
+router.post("/:id/apply", (req, res) => {
   const { firstName, lastName, phone, email, bio } = req.body;
   console.log(req.body);
   const missingFields = helpers.getMissingFields({
@@ -77,21 +77,21 @@ router.get("/:id", async (req, res) => {
   return res.status(404).json({ error: { message: "Not found" } });
 });
 
-// POST endpoint
-router.post("/apply2", (req, res) => {
-  // Access JSON data from the request body
-  const { firstName, lastName, phone, email, bio } = req.body;
+// // POST endpoint
+// router.post("/apply2", (req, res) => {
+//   // Access JSON data from the request body
+//   const { firstName, lastName, phone, email, bio } = req.body;
 
-  // Your logic to handle the POST request...
+//   // Your logic to handle the POST request...
 
-  // Send a response
-  res
-    .status(200)
-    .json({
-      success: true,
-      message: "Application submitted successfully.",
-      app: req.body,
-    });
-});
+//   // Send a response
+//   res
+//     .status(200)
+//     .json({
+//       success: true,
+//       message: "Application submitted successfully.",
+//       app: req.body,
+//     });
+// });
 
 module.exports = router;
