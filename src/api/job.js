@@ -31,12 +31,7 @@ router.get("/:id", async (req, res) => {
 
 router.post("/:id/apply", (req, res) => {
   const { firstName, lastName, phone, email, bio } = req.body;
-  // res.header("Access-Control-Allow-Origin", "*");
-  // res.header("Access-Control-Allow-Methods", "DELETE, PUT, GET, POST, OPTIONS");
-  // res.header(
-  //   "Access-Control-Allow-Headers",
-  //   "Origin, X-Requested-With, Content-Type, Accept"
-  // );
+  console.log(req.body);
   const missingFields = helpers.getMissingFields({
     firstName,
     lastName,
@@ -55,8 +50,8 @@ router.post("/:id/apply", (req, res) => {
     });
   }
 
-  const isValidEmail = helpers.validateEmail(application.email);
-  const isValidPhone = helpers.validatePhone(application.phone);
+  const isValidEmail = helpers.validateEmail(email);
+  const isValidPhone = helpers.validatePhone(phone);
 
   if (!isValidEmail && isValidPhone) {
     return res.status(400).json({ error: { message: "invalid email" } });
@@ -71,7 +66,15 @@ router.post("/:id/apply", (req, res) => {
       .status(400)
       .json({ error: { message: "invalid email and phone" } });
   }
-  return res.status(200).json({ data: application });
+  return res.status(200).json({
+    data: {
+      firstName,
+      lastName,
+      phone,
+      email,
+      bio,
+    },
+  });
 });
 
 // POST endpoint
