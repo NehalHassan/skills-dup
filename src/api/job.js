@@ -1,6 +1,5 @@
 const express = require("express");
 const axios = require("axios");
-const cors = require("cors");
 
 // const mockedData = require("../utils/data");
 const helpers = require("../helpers");
@@ -20,6 +19,22 @@ router.post("/:id/apply", (req, res) => {
   const { body } = req;
   const { firstName, lastName, phone, email, bio } = body;
   console.log(body);
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  // another common pattern
+  res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+  );
+  if (req.method === "OPTIONS") {
+    res.status(200).end();
+    return;
+  }
   const missingFields = helpers.getMissingFields({
     firstName,
     lastName,
