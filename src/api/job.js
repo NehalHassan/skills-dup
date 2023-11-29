@@ -17,8 +17,9 @@ const router = express.Router();
 // });
 
 router.post("/:id/apply", (req, res) => {
-  const { firstName, lastName, phone, email, bio } = req.body;
-  console.log(req.body);
+  const { body } = req;
+  const { firstName, lastName, phone, email, bio } = body;
+  console.log(body);
   const missingFields = helpers.getMissingFields({
     firstName,
     lastName,
