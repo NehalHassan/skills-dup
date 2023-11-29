@@ -78,16 +78,16 @@ router.get("/:id", async (req, res) => {
 });
 
 // POST endpoint
-// router.post("/:jobId/apply", (req, res) => {
-//   // Access JSON data from the request body
-//   const { firstName, lastName, phone, email, bio } = req.body;
+router.post("/apply2", (req, res) => {
+  // Access JSON data from the request body
+  const { firstName, lastName, phone, email, bio } = req.body;
 
-//   // Your logic to handle the POST request...
+  // Your logic to handle the POST request...
 
-//   // Send a response
-//   res
-//     .status(200)
-//     .json({ success: true, message: "Application submitted successfully." });
-// });
+  // Send a response
+  res
+    .status(200)
+    .json({ success: true, message: "Application submitted successfully." });
+});
 
 module.exports = router;
