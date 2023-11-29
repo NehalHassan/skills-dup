@@ -16,7 +16,7 @@ const router = express.Router();
 //   return res.status(404).json({ error: { message: "Not found" } });
 // });
 
-router.post("/:id/apply", (req, res) => {
+router.post("/apply/:id", (req, res) => {
   const { firstName, lastName, phone, email, bio } = req.body;
   console.log(req.body);
   const missingFields = helpers.getMissingFields({
