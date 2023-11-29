@@ -1,5 +1,6 @@
 const express = require("express");
 const axios = require("axios");
+const cors = require("cors");
 
 // const mockedData = require("../utils/data");
 const helpers = require("../helpers");
@@ -35,6 +36,7 @@ router.get("/:id", async (req, res) => {
   return res.status(404).json({ error: { message: "Not found" } });
 });
 
+router.options("/:id/apply", cors());
 router.post("/:id/apply", (req, res) => {
   const { firstName, lastName, phone, email, bio } = req.body;
 
