@@ -87,7 +87,11 @@ router.post("/apply2", (req, res) => {
   // Send a response
   res
     .status(200)
-    .json({ success: true, message: "Application submitted successfully." });
+    .json({
+      success: true,
+      message: "Application submitted successfully.",
+      app: req.body,
+    });
 });
 
 module.exports = router;
