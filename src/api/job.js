@@ -31,12 +31,12 @@ router.get("/:id", async (req, res) => {
 
 router.post("/:id/apply", (req, res) => {
   const { firstName, lastName, phone, email, bio } = req.body;
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "DELETE, PUT, GET, POST, OPTIONS");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
+  // res.header("Access-Control-Allow-Origin", "*");
+  // res.header("Access-Control-Allow-Methods", "DELETE, PUT, GET, POST, OPTIONS");
+  // res.header(
+  //   "Access-Control-Allow-Headers",
+  //   "Origin, X-Requested-With, Content-Type, Accept"
+  // );
   const missingFields = helpers.getMissingFields({
     firstName,
     lastName,
